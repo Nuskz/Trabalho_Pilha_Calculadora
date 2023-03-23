@@ -43,14 +43,12 @@ public class PilhaLista<T> implements Pilha<T>{
 
     @Override
     public boolean estaVazia() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'estaVazia'");
+        return lista.estaVazia();
     }
 
     @Override
     public void liberar() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'liberar'");
+        
     }
     
 }
