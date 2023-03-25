@@ -63,11 +63,11 @@ public class Calculadora {
         if(convertido.length % 2 != 0 && convertido.length >= 3){
             for (String s : convertido) {
                 if(cont % 2 == 0){
-                    if(s.equals("+") || s.equals("-") ||s.equals("*") ||s.equals("/")){
+                    if(s.equals("+") && s.equals("-") &&s.equals("*") &&s.equals("/")){
                         return false;
                     }
                 } else if(cont % 3 == 0){
-                    if(!s.equals("+") || !s.equals("-") ||!s.equals("*") ||!s.equals("/")){
+                    if(!s.equals("+") && !s.equals("-") &&!s.equals("*") &&!s.equals("/")){
                         return false;
                     }
                 }
