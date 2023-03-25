@@ -12,15 +12,25 @@ public class Principal {
         while (opc != 3) {
             expressao = s.nextLine();
             if (opc == 1) {
-                System.out.println("Agora digite a expressão(pos fixa):");
+                try {
+                    System.out.println("Agora digite a expressão(pos fixa):");
                 expressao = s.nextLine();
                 c = new Calculadora(expressao, true);
                 System.out.println("O resultado da expressão[" + expressao + "] é: " + c.getResposta());
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
+
             } else if (opc == 2) {
-                System.out.println("Agora digite a expressão(pos fixa):");
+                try {
+                    System.out.println("Agora digite a expressão(pos fixa):");
                 expressao = s.nextLine();
                 c = new Calculadora(expressao, false);
                 System.out.println("O resultado da expressão[" + expressao + "] é: " + c.getResposta());
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
+                
             } else if (opc == 3) {
                 break;
             } else {

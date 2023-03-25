@@ -57,7 +57,18 @@ public class Calculadora {
         return res;
     }
 
+    private boolean verificaExpressao(){
+        String[] convertido = this.expressao.split(" ");
+        if(convertido.length % 2 == 0){
+            return true;
+        }
+        return false;
+    }    
+
     private void verificarOpcao(boolean opcao) {
+        if (verificaExpressao() != false){
+            throw new IllegalArgumentException("Expressão: " + this.getExpressao() + " Inválida!");
+        }
         if (opcao) {
             pilhaVetor = new PilhaVetor<Float>(10);
             this.expressaoPilhaVetor();
@@ -78,10 +89,14 @@ public class Calculadora {
                 pilhaVetor.push(f);
                 cont++;
             } catch (Exception e) {
+                if(cont > 2){
+                    throw new IllegalArgumentException("Expressão: " + this.getExpressao() + " Inválida!");
+                }
                 if (cont == 2 || pilhaVetor.getTamanho() != 1) {
                     float valor1 = this.pilhaVetor.pop();
                     float valor2 = this.pilhaVetor.pop();
                     res = Calcular(valor1, valor2, s);
+                    pilhaVetor.push(res);
                     cont = 0;
                 }
             }
@@ -100,10 +115,14 @@ public class Calculadora {
                 pilhaLista.push(f);
                 cont++;
             } catch (Exception e) {
+                if(cont > 2){
+                    throw new IllegalArgumentException("Expressão: " + this.getExpressao() + " Inválida!");
+                }
                 if (cont == 2 || pilhaLista.getTamanho() != 1) {
                     float valor1 = this.pilhaLista.pop();
                     float valor2 = this.pilhaLista.pop();
                     res = Calcular(valor1, valor2, s);
+                    pilhaLista.push(res);
                     cont = 0;
                 }
             }
