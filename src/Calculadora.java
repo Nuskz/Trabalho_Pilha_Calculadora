@@ -6,12 +6,18 @@ public class Calculadora {
     private String expressao;
     private PilhaVetor<Float> pilhaVetor = new PilhaVetor<Float>(10);
     private PilhaLista<Float> pilhaLista = new PilhaLista<>();
-    private Boolean opcao;
-
-
+    private float resposta;
+    
     public Calculadora(String expressao, boolean opcao) {
         this.setExpressao(expressao);
-        this.setOpcao(opcao);
+        this.verificarOpcao(opcao);
+    }
+    public float getResposta() {
+        return resposta;
+    }
+
+    public void setResposta(float resposta) {
+        this.resposta = resposta;
     }
 
     public PilhaVetor<Float> getPilhaVetor() {
@@ -22,16 +28,6 @@ public class Calculadora {
         this.pilhaVetor = pilhaVetor;
     }
 
-    public Boolean getOpcao() {
-        return opcao;
-    }
-
-    public void setOpcao(Boolean opcao) {
-        this.opcao = opcao;
-    }
-
-
-
     public void setExpressao(String expressao) {
         if (expressao.isBlank() || expressao.isEmpty()) {
             throw new NullPointerException();
@@ -40,9 +36,9 @@ public class Calculadora {
         }
     }
 
-    private float Calcular(float valor1, float valor2, String s){
+    private float Calcular(float valor1, float valor2, String s) {
         float res;
-        switch (s){
+        switch (s) {
             case "*":
                 res = valor1 * valor2;
                 break;
@@ -60,29 +56,29 @@ public class Calculadora {
         }
         return res;
     }
-    private void verificarOpcao(boolean opcao) {
-        if(opcao){
-            pilhaVetor = new PilhaVetor<Float>(10);
-            expressaoPilhaVetor();
 
+    private void verificarOpcao(boolean opcao) {
+        if (opcao) {
+            pilhaVetor = new PilhaVetor<Float>(10);
+            this.expressaoPilhaVetor();
         } else {
             pilhaLista = new PilhaLista<Float>();
-            expressaoPilhaLista();
+            this.expressaoPilhaLista();
         }
     }
-    private  float expressaoPilhaVetor() {
+
+    private void expressaoPilhaVetor() {
         String[] convertido = this.expressao.split(" ");
         Float f;
         float res = 0f;
         int cont = 0;
-        for (String s:
-                convertido) {
+        for (String s : convertido) {
             try {
                 f = Float.parseFloat(s);
                 pilhaVetor.push(f);
                 cont++;
-            }catch (Exception e){
-                if (cont == 2 || pilhaVetor.getTamanho() != 1){
+            } catch (Exception e) {
+                if (cont == 2 || pilhaVetor.getTamanho() != 1) {
                     float valor1 = this.pilhaVetor.pop();
                     float valor2 = this.pilhaVetor.pop();
                     res = Calcular(valor1, valor2, s);
@@ -90,21 +86,21 @@ public class Calculadora {
                 }
             }
         }
-        return res;
+        setResposta(res);
     }
-    private float expressaoPilhaLista(){
+
+    private void expressaoPilhaLista() {
         String[] convertido = this.expressao.split(" ");
         Float f;
         float res = 0f;
         int cont = 0;
-        for (String s:
-                convertido) {
+        for (String s : convertido) {
             try {
                 f = Float.parseFloat(s);
                 pilhaLista.push(f);
                 cont++;
-            }catch (Exception e){
-                if (cont == 2 || pilhaLista.getTamanho() != 1){
+            } catch (Exception e) {
+                if (cont == 2 || pilhaLista.getTamanho() != 1) {
                     float valor1 = this.pilhaLista.pop();
                     float valor2 = this.pilhaLista.pop();
                     res = Calcular(valor1, valor2, s);
@@ -112,9 +108,8 @@ public class Calculadora {
                 }
             }
         }
-        return res;
+        setResposta(res);
     }
-
 
     public String getExpressao() {
         return expressao;
