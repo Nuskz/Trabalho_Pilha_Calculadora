@@ -17,7 +17,9 @@ public class PilhaLista<T> implements Pilha<T>{
         }
         lista.inserir(v);
     }
-
+    public int getTamanho(){
+        return this.lista.getTamanho();
+    }
     @Override
     public T pop() {
         NoLista<T> atual = lista.getPrimeiro();
