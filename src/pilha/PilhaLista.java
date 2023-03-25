@@ -1,3 +1,4 @@
+package pilha;
 import lista.ListaEncadeada;
 import lista.NoLista;
 
@@ -5,14 +6,15 @@ public class PilhaLista<T> implements Pilha<T>{
 
     private ListaEncadeada<T> lista = new ListaEncadeada<T>();    
 
-    public String toString(){
-        String str = "[";
-
-        return str + " ]";
+    public String toString(){ 
+        return lista.exibir();
     }
 
     @Override
     public void push(T v) {
+        if(v == null){
+            throw new NullPointerException();
+        }
         lista.inserir(v);
     }
 
@@ -37,8 +39,11 @@ public class PilhaLista<T> implements Pilha<T>{
 
     @Override
     public T peek() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'peek'");
+        NoLista<T> n = lista.getUltimo();
+        if(n != null){
+            return n.getInfo();
+        }
+       return null; 
     }
 
     @Override
@@ -48,7 +53,7 @@ public class PilhaLista<T> implements Pilha<T>{
 
     @Override
     public void liberar() {
-        
+        lista = new ListaEncadeada<T>();
     }
     
 }
