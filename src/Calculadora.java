@@ -58,16 +58,29 @@ public class Calculadora {
     }
 
     private boolean verificaExpressao(){
-        String[] convertido = this.expressao.split(" ");
-        if(convertido.length % 2 == 0){
+        String[] convertido = this.getExpressao().split(" ");
+        int cont = 1;
+        if(convertido.length % 2 != 0 && convertido.length >= 3){
+            for (String s : convertido) {
+                if(cont % 2 == 0){
+                    if(s.equals("+") || s.equals("-") ||s.equals("*") ||s.equals("/")){
+                        return false;
+                    }
+                } else if(cont % 3 == 0){
+                    if(!s.equals("+") || !s.equals("-") ||!s.equals("*") ||!s.equals("/")){
+                        return false;
+                    }
+                }
+                cont++;
+            }
             return true;
         }
         return false;
     }    
 
     private void verificarOpcao(boolean opcao) {
-        if (verificaExpressao() != false){
-            throw new IllegalArgumentException("Expressão: " + this.getExpressao() + " Inválida!");
+        if (verificaExpressao() == false){
+            throw new IllegalArgumentException("Expressão [" + this.getExpressao() + "] Inválida!");
         }
         if (opcao) {
             pilhaVetor = new PilhaVetor<Float>(10);
