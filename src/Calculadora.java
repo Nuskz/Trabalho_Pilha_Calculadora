@@ -63,46 +63,56 @@ public class Calculadora {
     private void verificarOpcao(boolean opcao) {
         if(opcao){
             pilhaVetor = new PilhaVetor<Float>(10);
-            verificarExpressaoPilhaVetor();
+            expressaoPilhaVetor();
 
         } else {
             pilhaLista = new PilhaLista<Float>();
-            verificarExpressaoPilhaLista();
+            expressaoPilhaLista();
         }
     }
-    private void verificarExpressaoPilhaVetor() {
+    private  float expressaoPilhaVetor() {
         String[] convertido = this.expressao.split(" ");
         Float f;
+        float res = 0f;
+        int cont = 0;
         for (String s:
                 convertido) {
             try {
                 f = Float.parseFloat(s);
                 pilhaVetor.push(f);
+                cont++;
             }catch (Exception e){
-                if (pilhaVetor.getTamanho() == 2){
+                if (cont == 2 || pilhaVetor.getTamanho() != 1){
                     float valor1 = this.pilhaVetor.pop();
                     float valor2 = this.pilhaVetor.pop();
-                    float res = Calcular(valor1, valor2, s);
+                    res = Calcular(valor1, valor2, s);
+                    cont = 0;
                 }
             }
         }
+        return res;
     }
-    private void verificarExpressaoPilhaLista(){
+    private float expressaoPilhaLista(){
         String[] convertido = this.expressao.split(" ");
         Float f;
+        float res = 0f;
+        int cont = 0;
         for (String s:
                 convertido) {
             try {
                 f = Float.parseFloat(s);
                 pilhaLista.push(f);
+                cont++;
             }catch (Exception e){
-                if (pilhaLista.getTamanho() == 2){
+                if (cont == 2 || pilhaLista.getTamanho() != 1){
                     float valor1 = this.pilhaLista.pop();
                     float valor2 = this.pilhaLista.pop();
-                    float res = Calcular(valor1, valor2, s);
+                    res = Calcular(valor1, valor2, s);
+                    cont = 0;
                 }
             }
         }
+        return res;
     }
 
 
