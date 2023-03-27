@@ -68,7 +68,7 @@ public class Calculadora {
                     }
                 } else if(cont % 3 == 0){
                     if(!s.equals("+") && !s.equals("-") &&!s.equals("*") &&!s.equals("/")){
-                        return false;
+                        return true;
                     }
                 }
                 cont++;
