@@ -10,6 +10,10 @@ public class PilhaVetor<T> implements Pilha<T> {
         return tamanho;
     }
 
+    public T[] getInfo(){
+        return info;
+    }
+
     public PilhaVetor(int limite) {
         this.limite = limite;
         this.info = (T[]) new Object[limite];
@@ -21,6 +25,25 @@ public class PilhaVetor<T> implements Pilha<T> {
             str += info[i] + " ,";
         }
         return str + "]";
+    }
+
+    public int compara(PilhaVetor<T> p2){
+        if(p2 == null){
+            throw new NullPointerException("vetor nulo");
+        }
+        if(this.getTamanho() < p2.getTamanho()){
+            return -1;
+        } else if(this.getTamanho() == p2.getTamanho()){
+            T[] vetor = p2.getInfo();
+            for(int i = 0; i < this.getTamanho(); i++){
+                if(this.info[i] != vetor[i]){
+                    return 1;
+                }
+            }
+            return 0;
+        } else {
+            return 1;
+        }
     }
 
     @Override
