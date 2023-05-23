@@ -10,7 +10,7 @@ public class PilhaVetor<T> implements Pilha<T> {
         return tamanho;
     }
 
-    public T[] getInfo(){
+    private T[] getInfo(){
         return info;
     }
 
@@ -36,7 +36,7 @@ public class PilhaVetor<T> implements Pilha<T> {
         } else if(this.getTamanho() == p2.getTamanho()){
             T[] vetor = p2.getInfo();
             for(int i = 0; i < this.getTamanho(); i++){
-                if(this.info[i] != vetor[i]){
+                if(!this.info[i].equals(vetor[i])){
                     return 1;
                 }
             }
